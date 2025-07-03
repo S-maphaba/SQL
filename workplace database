@@ -1,0 +1,69 @@
+CREATE TABLE Colleagues(
+ID INT NOT NULL PRIMARY KEY,
+SURNAME VARCHAR(100),
+INITIALS CHAR(5),
+AGE INT,
+GENDER CHAR(6),
+SALARY REAL
+);
+
+-- SECOND TABLE
+
+CREATE TABLE projects(
+PROJECT_NUMBER INT NOT NULL PRIMARY KEY,
+START_DATE  date,
+PROJECT_NAME VARCHAR(100),
+DEPARTMENT VARCHAR(100),
+ASSIGNED_TO VARCHAR(55)
+);
+
+-- ONE COMBINED TABLE
+SELECT * FROM Colleagues , projects;
+
+--ADD A COLUMN TO THE TABLE PROJECTS
+ALTER TABLE projects ADD COLUMN is_complete BOOLEAN DEFAULT FALSE;
+
+SELECT * FROM projects;
+
+INSERT INTO Colleagues 
+values (1,'MAPHABA','S',NULL ,'MALE',2300);
+
+UPDATE Colleagues
+SET INITIALS = 'B'
+WHERE ID = 1;
+
+INSERT INTO Colleagues (ID, SURNAME, INITIALS, AGE, GENDER, SALARY) VALUES
+(9, 'Smith', 'J.K.', 32, 'Male', 55000.00),
+(2, 'Johnson', 'A.M.', 28, 'Female', 48000.00),
+(3, 'Williams', 'B.L.', 45, 'Male', 72000.00),
+(4, 'Brown', 'C.D.', 36, 'Female', 61000.00),
+(5, 'Davis', 'E.F.', 29, 'Male', 52000.00),
+(6, 'Miller', 'G.H.', 41, 'Female', 68000.00),
+(7, 'Wilson', 'I.J.', 33, 'Male', 59000.00),
+(8, 'Taylor', 'K.L.', 27, 'Female', 47000.00);
+
+
+INSERT INTO projects (PROJECT_NUMBER, START_DATE, PROJECT_NAME, DEPARTMENT, ASSIGNED_TO) VALUES
+(1001, '2023-01-15', 'Phoenix', 'Research', 'J.K.'),
+(1002, '2023-03-22', 'Horizon', 'Development', 'A.M.'),
+(1003, '2023-02-10', 'Genesis', 'Marketing', 'B.L.'),
+(1004, '2023-04-05', 'Aurora', 'Research', 'C.D.'),
+(1005, '2023-05-18', 'Nexus', 'Development', 'E.F.'),
+(1006, '2023-01-30', 'Pinnacle', 'Operations', 'G.H.'),
+(1007, '2023-06-12', 'Vanguard', 'Marketing', 'I.J.'),
+(1008, '2023-07-01', 'Odyssey', 'Research', 'K.L.');
+
+SELECT * FROM Colleagues;
+
+SELECT * FROM projects;
+
+SELECT c.ID, c.SURNAME, c.INITIALS, p.PROJECT_NUMBER, p.PROJECT_NAME
+FROM Colleagues c
+JOIN projects p ON c.INITIALS = p.ASSIGNED_TO;
+
+WITH colleague_projects AS (
+    SELECT c.SURNAME, p.PROJECT_NAME
+    FROM Colleagues c
+    JOIN projects p ON c.INITIALS = p.ASSIGNED_TO
+)
+SELECT * FROM colleague_projects;
