@@ -67,3 +67,18 @@ WITH colleague_projects AS (
     JOIN projects p ON c.INITIALS = p.ASSIGNED_TO
 )
 SELECT * FROM colleague_projects;
+
+[SchemaField('title', 'STRING', 'NULLABLE', 'Story title', (), None),
+ SchemaField('url', 'STRING', 'NULLABLE', 'Story url', (), None),
+ SchemaField('text', 'STRING', 'NULLABLE', 'Story or comment text', (), None),
+ SchemaField('dead', 'BOOLEAN', 'NULLABLE', 'Is dead?', (), None),
+ SchemaField('by', 'STRING', 'NULLABLE', "The username of the item's author.", (), None),
+ SchemaField('score', 'INTEGER', 'NULLABLE', 'Story score', (), None),
+ SchemaField('time', 'INTEGER', 'NULLABLE', 'Unix time', (), None),
+ SchemaField('timestamp', 'TIMESTAMP', 'NULLABLE', 'Timestamp for the unix time', (), None),
+ SchemaField('type', 'STRING', 'NULLABLE', 'Type of details (comment, comment_ranking, poll, story, job, pollopt)', (), None),
+ SchemaField('id', 'INTEGER', 'NULLABLE', "The item's unique id.", (), None),
+ SchemaField('parent', 'INTEGER', 'NULLABLE', 'Parent comment ID', (), None),
+ SchemaField('descendants', 'INTEGER', 'NULLABLE', 'Number of story or poll descendants', (), None),
+ SchemaField('ranking', 'INTEGER', 'NULLABLE', 'Comment ranking', (), None),
+ SchemaField('deleted', 'BOOLEAN', 'NULLABLE', 'Is deleted?', (), None)]
